@@ -1,0 +1,22 @@
+{
+  "name": "node-one-app",
+  "version": "1.0.0",
+  "description": "One-App Based Generator in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amansx/node-one-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amansx/node-one-app/issues"
+  },
+  "homepage": "https://github.com/amansx/node-one-app#readme",
+  "devDependencies": {
+    "webpack": "^3.6.0"
+  }
+}

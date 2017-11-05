@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"noImplicitAny": false,
+		"lib": [ "dom", "es2015" ],
+		"target": "es2015",
+		"baseUrl": "src/",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"allowSyntheticDefaultImports": true,
+		"jsx": "react"
+	}
+}
