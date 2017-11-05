@@ -1,5 +1,5 @@
 {
-	"-path"             : "/Users/aman/Projects/node-one-app/dist",
+	"-path"             : "<%%{WMCG_PWD}%%>",
 	".gitignore"        : {"-file": ".gitignore"},
 	"package.json"      : {"-file": "package.json"},	
 	"README.md"         : {"-file": "README.md"},
