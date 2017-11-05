@@ -1,17 +1,17 @@
-// require('./app-index');
-// import * as react from 'react';
-// const G: react.Component = new react.Component();
-// G.componentWillMount = function(){
-// 	console.log('AAA');
-// }
-// G.componentDidMount = () => {
-// 	console.log('HELLO');
-// 	console.log('HEL222');
-// };
-// G.componentWillUpdate = () => {};
-// G.componentWillReceiveProps = () => {};
-// // G.componentDidCatch(null, null);
-// G.componentWillUnmount = () => { };
 
+class App {
 
-require('./index');
+	private _title: string;
+
+	constructor( title?:string ){
+		this._title = title || 'Undefined';
+	}
+
+	public displayTitle(){
+		console.log(this._title);
+	}
+
+}
+
+const app: App = new App('Hello');
+app.displayTitle();

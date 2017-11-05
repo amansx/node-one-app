@@ -1,51 +1,30 @@
 {
-	"-path": "<%{WMCG_PWD}%>",
-	"webpack.config.js": {
-		"-file": "web/webpack.config.js"
-	},
-	"tsconfig.json": {
-		"-file": "web/tsconfig.json"
-	},
-	"tslint.json": {
-		"-file": "tslint.json"
-	},
-	"package.json": {
-		"-file": "web/package.json"
-	},
-	".gitignore": {
-		"-file": "web/gitignore.web"
-	},
-	"README.md": {
-		"-file": "web/README.md"
+	"-path"             : "/Users/aman/Projects/node-one-app/dist",
+	".gitignore"        : {"-file": ".gitignore"},
+	"package.json"      : {"-file": "package.json"},	
+	"README.md"         : {"-file": "README.md"},
+	"tsconfig.json"     : {"-file": "tsconfig.json"},
+	"webpack.config.js" : {"-file": "webpack.config.js"},
+	"webpack": {
+		"assets.config.js" : { "-file": "webpack/assets.config.js"},
+		"base.config.js" : { "-file": "webpack/base.config.js"},
+		"bundle.dll.config.js" : { "-file": "webpack/bundle.dll.config.js"},
+		"markup.config.js" : { "-file": "webpack/markup.config.js"},
+		"tyepscript.config.js" : { "-file": "webpack/typescript.config.js"}
 	},
 	"src": {
-		"app": { 
-			"-type": "d",
-			"app.ts": { "-file": "web/app/app.ts" },
-			"component": {
-				"component.ts": { "-file": "web/app/component/component.ts" },
-				"component.styl": { "-file": "web/app/component/component.styl" },
-				"component.htm": { "-file": "web/app/component/component.htm" }
-			}
-		},
-		"styles": { 
-			"-type": "d",
-			"_vendor_.styl": { "-file": "web/styles/_vendor_.styl" },
-			"_common_.styl": { "-file": "web/styles/_common_.styl" },
-			"vendor": { 
-				"-type": "d",
-				"reset.styl": { "-file": "web/styles/vendor/reset.styl" }
-			}
+		"app": {
+			"app-entry.ts": {"-file": "src/app/app-entry.ts"}
 		},
 		"templates": { 
 			"-type": "d",
-			"entry.ejs": { "-file": "web/templates/entry.ejs" },
+			"entry.ejs": { "-file": "templates/entry.ejs" },
 			"browserconfig.xml": {
-				"-file": "web/templates/browserconfig.xml"
+				"-file": "templates/browserconfig.xml"
 			},
 			"robots.txt": {
-				"-file": "web/templates/robots.txt"
+				"-file": "templates/robots.txt"
 			}
-		}
+		}		
 	}
 }
