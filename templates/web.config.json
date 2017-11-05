@@ -1,5 +1,5 @@
 {
-	"-path"             : "<%%{WMCG_PWD}%%>",
+	"-path"             : "<%%{projectPwd}%%>",
 	".gitignore"        : {"-file": ".gitignore"},
 	"package.json"      : {"-file": "package.json"},	
 	"README.md"         : {"-file": "README.md"},

@@ -4,17 +4,27 @@ const _ = require('lodash');
 const Mustache = require('mustache');
 const Path = require('path');
 const Jsondir = require('jsondir');
-const args = require('minimist')(process.argv.slice(2));
+const Optimist = require('optimist');
+const colors = require('colors');
 const SRCDIR = Path.join(__dirname, 'templates');
 
 Mustache.tags = ['<%%', '%%>'];
 
-const ProjectType = args.type || 'Unknown';
-const ProjectSettings = {
-	WMCG_NAME                : 'Sample Project',
-	WMCG_PROJECT_NAME_DASHED : 'sample-project',
-	WMCG_PWD  				 : Path.join(process.cwd(), '/dist')
+const options = {
+	type          : 'web',
+	outDir        : './',
+	projectName   : undefined
 };
+
+const usage = 'Usage: $0 -' + Object.keys(options).join('=[value] -') + '=[value]'
+const args = Optimist
+    		.usage(usage.yellow)
+    		.default(options)
+    		.demand(Object.keys(options))
+			.argv;
+
+args.projectNameDashed = (args.projectName+'').split(' ').join('-').toLowerCase();
+args.projectPwd        = Path.join(process.cwd(), args.outDir || options.outDir);
 
 if(args.version){
 	const version = require(Path.join(__dirname,'package.json')).version;
@@ -22,12 +32,13 @@ if(args.version){
 	return;	
 }
 
-let ProjectDir, ProjectConf;
+const ProjectDir  = Path.join(SRCDIR, args.type);
+let ProjectConf;
 try{
-	ProjectDir  = Path.join(SRCDIR, ProjectType);
-	ProjectConf = require(Path.join(SRCDIR, ProjectType + '.config' ));
+	ProjectConf = require(Path.join(SRCDIR, (args.type+'.config') ));
 }catch(e){
-	console.log('Error: No Known Configuration for Type:', ProjectType +'!\n');
+	const msg = 'Error: No Known Configuration for Type:' + args.type + '!\n';
+	console.log(msg.red);
 	return;
 }
 
@@ -64,12 +75,12 @@ Jsondir.dir2json(ProjectDir, {attributes: ['content', 'mode']}, function(err, re
 	const contents = generateFSJsonWithContents(results);
 	let template = JSON.stringify(contents, null, 4);
 	Mustache.parse(template);
-	const rendered = Mustache.render(template, ProjectSettings);
+	const rendered = Mustache.render(template, args);
 	const jsonObj = JSON.parse(rendered);
 
 	Jsondir.json2dir(jsonObj, function(err) {
 		if (err) throw err;
-		console.log('Success: Done!\n');
+		console.log('Success: Complete!\n'.green);
 	});
 
 });

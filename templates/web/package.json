@@ -1,7 +1,7 @@
 {
-  "<%%{WMCG_NAME}%%>": "<%%{WMCG_PROJECT_NAME_DASHED}%%>",
+  "name": "<%%{projectNameDashed}%%>",
   "version": "0.0.1",
-  "description": "",
+  "description": "<%%{projectName}%%>",
   "main": "index.js",
   "keywords": [],
   "author": "",
