@@ -5,7 +5,7 @@ const Mustache = require('mustache');
 const Path = require('path');
 const Jsondir = require('jsondir');
 const args = require('minimist')(process.argv.slice(2));
-const SRCDIR = Path.join(process.cwd(), 'templates');
+const SRCDIR = Path.join(__dirname, 'templates');
 
 Mustache.tags = ['<%%', '%%>'];
 
@@ -13,7 +13,7 @@ const ProjectType = args.type || 'Unknown';
 const ProjectSettings = {
 	WMCG_NAME                : 'Sample Project',
 	WMCG_PROJECT_NAME_DASHED : 'sample-project',
-	WMCG_PWD  				 : Path.join(__dirname, '/dist')
+	WMCG_PWD  				 : Path.join(process.cwd(), '/dist')
 };
 
 let ProjectDir, ProjectConf;
