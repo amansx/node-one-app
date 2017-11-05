@@ -3,8 +3,8 @@
   "bin": {
     "oneapp": "./generator.js"
   },
-  "version": "1.0.0",
-  "description": "One-App Based Generator in Node.js",
+  "version": "0.0.1",
+  "description": "One-App Generator written in Node.js",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
