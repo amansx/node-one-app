@@ -11,26 +11,22 @@ const SRCDIR = Path.join(__dirname, 'templates');
 Mustache.tags = ['<%%', '%%>'];
 
 const options = {
-	type          : 'web',
-	outDir        : './',
-	projectName   : undefined
+	type          : { default: 'web',     alias: 't' },
+	outDir        : { default: './',      alias: 'o' },
+	projectName   : { default: undefined, alias: 'p' }
 };
 
-const usage = 'Usage: $0 -' + Object.keys(options).join('=[value] -') + '=[value]'
+const version = require(Path.join(__dirname,'package.json')).version;
+
+const usage = `One-App Generator Version: ${version}\nUsage: oneapp {Options..}`;
 const args = Optimist
     		.usage(usage.yellow)
-    		.default(options)
+    		.options(options)
     		.demand(Object.keys(options))
 			.argv;
 
 args.projectNameDashed = (args.projectName+'').split(' ').join('-').toLowerCase();
-args.projectPwd        = Path.join(process.cwd(), args.outDir || options.outDir);
-
-if(args.version){
-	const version = require(Path.join(__dirname,'package.json')).version;
-	console.log(version, "\n");
-	return;	
-}
+args.projectPwd        = Path.join(process.cwd(), args.outDir || options.outDir.default);
 
 const ProjectDir  = Path.join(SRCDIR, args.type);
 let ProjectConf;
