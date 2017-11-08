@@ -7,15 +7,26 @@ const Jsondir = require('jsondir');
 const Optimist = require('optimist');
 const colors = require('colors');
 const SRCDIR = Path.join(__dirname, 'templates');
+const Validator = require('jsonschema').Validator;
+const validator = new Validator();
 
 Mustache.tags = ['TSTART_', '_TEND'];
 
 const options = {
-	version       : { alias: 'v', describe: 'Print Version and Exit'.cyan },
-	type          : { alias: 't', describe: 'Project Type [web|node] (Enum)'.cyan, default: 'web' },
-	outDir        : { alias: 'o', describe: 'Output Directory Name (String)'.cyan, default: './' },
-	projectName   : { alias: 'p', describe: 'Project Name (String)'.cyan },
-	force         : { alias: 'f', describe: 'Force overwrite changes'.cyan },
+	version       : { alias: 'v', describe: 'Print Version and Exit'.cyan, type: 'boolean' },
+	type          : { alias: 't', describe: 'Project Type [web|node]'.cyan, default: 'web', type: 'string' },
+	outDir        : { alias: 'o', describe: 'Output Directory Name (String)'.cyan, default: './', type: 'string' },
+	projectName   : { alias: 'p', describe: 'Project Name (String)'.cyan, type: 'string' },
+	force         : { alias: 'f', describe: 'Force overwrite changes'.cyan, type: 'boolean'},
+};
+
+const schema = {
+	id:'/argsSchema',
+	type: 'object',
+	properties: options,
+	required: [
+		'projectName'
+	]
 };
 
 // Get current version
@@ -24,19 +35,20 @@ const version = require(Path.join(__dirname,'package.json')).version;
 // Usage text
 const usage = `One-App Generator Version: ${version}\nUsage: oneapp {Options..}`;
 
+
 // Get user arguments
 const argsVerify = Optimist.usage(usage.yellow).options(options);
 argsVerify.check((args) => {
-	
 	if(args.version){
 		console.log(version.cyan);
 		process.exit(0);
 	}
-	
-	argsVerify.demand([
-		'projectName'
-	]).argv;
-	
+	const validation = validator.validate(args, schema);
+	if(validation.errors.length){
+		throw(validation.errors.map((e)=>{
+			return e.stack.replace(validation.propertyPath, 'Generator')
+		}).join('\n').red);
+	}
 	return true;
 })
 
@@ -45,7 +57,7 @@ const args = argsVerify.argv;
 // Default Arguments
 _.merge(args,{
 	fileMsg           : 'Auto-generated file by one-app generator. Do NOT Modify! \\n' + 
-						'* Create an overrides file in the root directory instead.',
+						'* Create an overrides file in the webpack directory instead.',
 
 	projectNameDashed : (args.projectName+'').split(' ').join('-').toLowerCase(),
 
