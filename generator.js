@@ -47,7 +47,7 @@ argsVerify.check((args) => {
 	if(validation.errors.length){
 		throw(validation.errors.map((e)=>{
 			return e.stack.replace(validation.propertyPath, 'Generator')
-		}).join('\n').red);
+		}).join('\n').red + '\n' );
 	}
 	return true;
 })
