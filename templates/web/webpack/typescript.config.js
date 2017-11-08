@@ -1,3 +1,7 @@
+/*
+* TSTART_fileMsg_TEND
+*/
+
 const path = require('path');
 const webpack = require('webpack');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
@@ -12,7 +16,12 @@ module.exports = (isDev, conf) => {
 				loader: 'babel-loader',
 				options: {
 					presets: [[
-						'env', {modules: false, "targets": {"browsers": ["last 2 Chrome versions"]}}
+						'env', {
+							modules: false, 
+							"targets": {
+								"browsers": ["IE 11"]
+							}
+						}
 					]],
 					plugins: ["syntax-dynamic-import"],
 					cacheDirectory: conf.cachePath

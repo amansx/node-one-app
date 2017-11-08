@@ -8,25 +8,49 @@ const Optimist = require('optimist');
 const colors = require('colors');
 const SRCDIR = Path.join(__dirname, 'templates');
 
-Mustache.tags = ['<%%', '%%>'];
+Mustache.tags = ['TSTART_', '_TEND'];
 
 const options = {
-	type          : { default: 'web',     alias: 't' },
-	outDir        : { default: './',      alias: 'o' },
-	projectName   : { default: undefined, alias: 'p' }
+	version       : { alias: 'v', describe: 'Print Version and Exit'.cyan },
+	type          : { alias: 't', describe: 'Project Type [web|node] (Enum)'.cyan, default: 'web' },
+	outDir        : { alias: 'o', describe: 'Output Directory Name (String)'.cyan, default: './' },
+	projectName   : { alias: 'p', describe: 'Project Name (String)'.cyan },
+	force         : { alias: 'f', describe: 'Force overwrite changes'.cyan },
 };
 
+// Get current version
 const version = require(Path.join(__dirname,'package.json')).version;
 
+// Usage text
 const usage = `One-App Generator Version: ${version}\nUsage: oneapp {Options..}`;
-const args = Optimist
-    		.usage(usage.yellow)
-    		.options(options)
-    		.demand(Object.keys(options))
-			.argv;
 
-args.projectNameDashed = (args.projectName+'').split(' ').join('-').toLowerCase();
-args.projectPwd        = Path.join(process.cwd(), args.outDir || options.outDir.default);
+// Get user arguments
+const argsVerify = Optimist.usage(usage.yellow).options(options);
+argsVerify.check((args) => {
+	
+	if(args.version){
+		console.log(version.cyan);
+		process.exit(0);
+	}
+	
+	argsVerify.demand([
+		'projectName'
+	]).argv;
+	
+	return true;
+})
+
+const args = argsVerify.argv;
+
+// Default Arguments
+_.merge(args,{
+	fileMsg           : 'Auto-generated file by one-app generator. Do NOT Modify! \\n' + 
+						'* Create an overrides file in the root directory instead.',
+
+	projectNameDashed : (args.projectName+'').split(' ').join('-').toLowerCase(),
+
+	projectPwd        : Path.join(process.cwd(), args.outDir || options.outDir.default)
+});
 
 const ProjectDir  = Path.join(SRCDIR, args.type);
 let ProjectConf;
@@ -74,7 +98,7 @@ Jsondir.dir2json(ProjectDir, {attributes: ['content', 'mode']}, function(err, re
 	const rendered = Mustache.render(template, args);
 	const jsonObj = JSON.parse(rendered);
 
-	Jsondir.json2dir(jsonObj, function(err) {
+	Jsondir.json2dir(jsonObj, {overwrite: !!args.force}, function(err) {
 		if (err) throw err;
 		console.log('Success: Complete!\n'.green);
 	});

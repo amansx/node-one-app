@@ -10,6 +10,12 @@ const BuildConfig = {
 	cachePath:  path.resolve(process.cwd(), '.cache')
 };
 
+const deepMerge = (conf, confb) => {
+	return _.mergeWith(_.cloneDeep(conf), _.cloneDeep(confb), (o, s)=>{
+		if (_.isArray(o)) { return o.concat(s); }
+	});	
+}
+
 const CONFIG = (env = {ENV:'prod'}) => {
 
 	const isDev = env.ENV === 'dev';
@@ -29,23 +35,23 @@ const CONFIG = (env = {ENV:'prod'}) => {
 				confPartial = confPartial(isDev, _.merge(_.cloneDeep(env), BuildConfig));
 			}
 
-			conf = _.mergeWith(_.cloneDeep(conf), confPartial, (o, s)=>{
-				if (_.isArray(o)) { return o.concat(s); }
-			});
+			conf = deepMerge(conf, confPartial);
 
 		});
+		
 		return conf;
 	};
 
 	if (buildDll) {
 		rimraf.sync(BuildConfig.distPath);
-		return loadConfig('./webpack/**/*.dll.config.js');
+		return loadConfig('./webpack/__base/*.dll.config.js');
 	} else {
-		return loadConfig('./webpack/**/!(*.dll.config.js)');
+		return deepMerge(
+			loadConfig('./webpack/__base/!(*.dll.config.js)'),
+			loadConfig('./webpack/!(*.dll.config.js)')
+		)
 	}
 
 };
-
-// console.log( JSON.stringify(CONFIG(), null, 4) );
 
 module.exports = CONFIG;

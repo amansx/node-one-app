@@ -1,3 +1,7 @@
+/*
+* TSTART_fileMsg_TEND
+*/
+
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');

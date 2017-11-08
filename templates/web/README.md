@@ -1,9 +1,7 @@
-# <%{ WMCG_PROJECT_NAME }%>
+# TSTART_projectName_TEND
 
 ## Installation Instructions
-This will Install webpack with Typescript and Stylus support.
-Users will be required to install their own webserver to serve the files
-
+This will Install webpack with all the required dependencies.
 
 ```shell
 # Run NPM install in the base directory
@@ -11,10 +9,10 @@ npm install
 ```
 
 ```shell
-# Run
-# Development
-npm run dev
+# Build:Development
+# This initiates the watch operation (detects file changes and auto compiles)
+npm start
 
-# Production
+# Build:Production
 npm run build
 ```

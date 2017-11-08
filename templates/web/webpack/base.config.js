@@ -1,3 +1,7 @@
+/*
+* TSTART_fileMsg_TEND
+*/
+
 const _       = require('lodash');
 const path    = require('path');
 const webpack = require('webpack');
@@ -42,7 +46,7 @@ module.exports = (isDev, conf) => {
 	};
 	
 	const baseConfig = {
-		entry : path.resolve( conf.srcPath, "app/app-entry.ts" ),
+		entry : path.resolve(conf.srcPath, "app/app.tsx"),
 		output: {
 			path                : path.resolve(conf.distPath),
 			filename            : isDev ? 'app.[name].js' : `app.[name].[id].[chunkhash:${hashLength}].js`,
