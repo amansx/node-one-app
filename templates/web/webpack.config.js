@@ -50,10 +50,7 @@ const CONFIG = (env = {ENV:'prod'}) => {
 		rimraf.sync(BuildConfig.distPath);
 		return loadConfig('./webpack/__base/*.dll.config.js');
 	} else {
-		return _.merge(
-			loadConfig('./webpack/__base/!(*.dll.config.js).js'),
-			loadConfig('./webpack/!(*.dll.config.js).js')
-		)
+		return loadConfig('./webpack/__base/!(*.dll.config.js)');
 	}
 
 };
