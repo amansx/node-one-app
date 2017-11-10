@@ -58,9 +58,7 @@ const args = argsVerify.argv;
 _.merge(args,{
 	fileMsg           : 'Auto-generated file by one-app generator. Do NOT Modify! \\n' + 
 						'* Create an overrides file in the webpack directory instead.',
-
 	projectNameDashed : (args.projectName+'').split(' ').join('-').toLowerCase(),
-
 	projectPwd        : Path.join(process.cwd(), args.outDir || options.outDir.default)
 });
 
@@ -105,8 +103,10 @@ Jsondir.dir2json(ProjectDir, {attributes: ['content', 'mode']}, function(err, re
 	if (err) throw err;
 
 	const contents = generateFSJsonWithContents(results);
+
 	let template = JSON.stringify(contents, null, 4);
 	Mustache.parse(template);
+
 	const rendered = Mustache.render(template, args);
 	const jsonObj = JSON.parse(rendered);
 

@@ -1,2 +1,2 @@
 # node-one-app
-One-App Based Generator in Node.js
+One-App Generator in Node.js

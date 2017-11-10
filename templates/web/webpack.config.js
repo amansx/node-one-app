@@ -1,3 +1,7 @@
+/*
+* TSTART_fileMsg_TEND
+*/
+
 const _       = require('lodash');
 const glob    = require('glob');
 const path    = require('path');
@@ -46,9 +50,9 @@ const CONFIG = (env = {ENV:'prod'}) => {
 		rimraf.sync(BuildConfig.distPath);
 		return loadConfig('./webpack/__base/*.dll.config.js');
 	} else {
-		return deepMerge(
-			loadConfig('./webpack/__base/!(*.dll.config.js)'),
-			loadConfig('./webpack/!(*.dll.config.js)')
+		return _.merge(
+			loadConfig('./webpack/__base/!(*.dll.config.js).js'),
+			loadConfig('./webpack/!(*.dll.config.js).js')
 		)
 	}
 
