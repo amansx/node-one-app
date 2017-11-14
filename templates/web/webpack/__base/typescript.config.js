@@ -23,7 +23,10 @@ module.exports = (isDev, conf) => {
 							}
 						}
 					]],
-					plugins: ["syntax-dynamic-import"],
+					plugins: [
+						'syntax-dynamic-import',
+						'transform-runtime'
+					],
 					cacheDirectory: conf.cachePath
 				}
 			},

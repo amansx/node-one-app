@@ -48,5 +48,10 @@
     "ts-loader": "^2.1.0",
     "typescript": "^2.5.2",
     "webpack": "^3.8.1"
+  },
+  "dependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-runtime": "^6.26.0"
   }
 }

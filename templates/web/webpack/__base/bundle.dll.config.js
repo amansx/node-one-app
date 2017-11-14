@@ -15,7 +15,8 @@ module.exports = (isDev, config) => {
 				'react', 
 				'lodash',
 				'react-dom',
-				'redux'
+				'redux',
+				'babel-polyfill'
 			],
 		},
 
