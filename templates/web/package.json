@@ -10,7 +10,8 @@
     "prebuild": "webpack --env.DLL=true --config ./webpack.config --display-error-details",
     "build": "webpack --config ./webpack.config --display-error-details",
     "prestart": "webpack --progress --env.ENV=dev --env.DLL=true --config ./webpack.config --display-error-details",
-    "start": "webpack --watch --env.ENV=dev --config ./webpack.config --display-error-details"
+    "start": "webpack --watch --env.ENV=dev --config ./webpack.config --display-error-details",
+    "start:nobundle": "webpack --watch --env.ENV=dev --config ./webpack.config --display-error-details"
   },
   "devDependencies": {
     "@types/bluebird": "^3.5.17",

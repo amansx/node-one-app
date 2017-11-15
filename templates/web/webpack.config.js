@@ -6,6 +6,7 @@ const _       = require('lodash');
 const glob    = require('glob');
 const path    = require('path');
 const rimraf  = require('rimraf');
+const colors  = require('colors');
 
 const BuildConfig = {
 	rootPath:   process.cwd(),
@@ -31,26 +32,42 @@ const CONFIG = (env = {ENV:'prod'}) => {
 
 	const loadConfig = (globpath) => {
 		let conf = {};
-		glob.sync(globpath).forEach(function(file) {
+		
+		const userDir = path.join(process.cwd(), './webpack/');
+		const baseDir = path.join(process.cwd(), './webpack/__base/');
 
-			let confPartial = require(path.resolve(file));
-			
+		glob.sync(globpath, {cwd: baseDir}).forEach(function(file) {
+
+			let confPartial = require(path.resolve(baseDir, file));
 			if(typeof confPartial === 'function'){
 				confPartial = confPartial(isDev, _.merge(_.cloneDeep(env), BuildConfig));
 			}
+			
+			let userConfPartial;
+			try{
+				userConfPartial = require(path.resolve(userDir, file));
+			}catch(e){}
+			if(typeof userConfPartial === 'function'){
+				userConfPartial = userConfPartial(isDev, confPartial, _.merge(_.cloneDeep(env), BuildConfig));
+			}
 
-			conf = deepMerge(conf, confPartial);
+			if(userConfPartial){
+				conf = deepMerge(conf, userConfPartial);
+			}else{
+				conf = deepMerge(conf, confPartial);
+			}
 
 		});
 		
+		console.log(JSON.stringify(conf, null, 4).white);
 		return conf;
 	};
 
 	if (buildDll) {
 		rimraf.sync(BuildConfig.distPath);
-		return loadConfig('./webpack/__base/*.dll.config.js');
+		return loadConfig('*.dll.config.js');
 	} else {
-		return loadConfig('./webpack/__base/!(*.dll.config.js)');
+		return loadConfig('./!(*.dll.config.js|!(*.config.js))');
 	}
 
 };
