@@ -3,7 +3,7 @@
   "bin": {
     "oneapp": "./generator.js"
   },
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "One-App Generator written in Node.js",
   "main": "index.js",
   "scripts": {
@@ -26,9 +26,5 @@
     "lodash": "^4.17.4",
     "mustache": "^2.3.0",
     "optimist": "^0.6.1"
-  },
-  "devDependencies": {
-    "cytoscape": "^3.2.5",
-    "jquery": "^3.2.1"
   }
 }
