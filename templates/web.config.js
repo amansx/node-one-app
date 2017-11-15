@@ -17,7 +17,9 @@ module.exports = {
 	},
 	"src": {
 		"app": {
+			"app.tsx"            : { "-file": "src/app/app.tsx" },
 			"app.sample.tsx"            : { "-file": "src/app/app.sample.tsx" },
+			"heap.sample.tsx"            : { "-file": "src/app/heap.sample.tsx" },
 			"cytoscape.sample.tsx"      : { "-file": "src/app/cytoscape.sample.tsx" }
 		},
 		"templates": { 

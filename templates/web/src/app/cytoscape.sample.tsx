@@ -25,24 +25,31 @@ const config = {
 	style: [
 		{
 			selector: 'node',
-			style: { 'background-color': 'red', label: 'data(id)' }
+			style: {
+				'background-color': 'black',
+				'label': 'data(id)',
+				'color': 'white',
+				'padding': '5px',
+				'font-size': '25px',
+				'text-valign': 'center'
+			}
 		}
 	],
 	elements: [],
 	userPanningEnabled: false,
 	layout: {
-		name: 'grid'
+		name: 'breadthfirst'
 	}
 };
 
 const dataEls = [
 	{ data: { id: 'a' } },
 	{ data: { id: 'b' } },
-	{
-		data: { id: 'ab', source: 'a', target: 'b' }
-	},
+	{ data: { id: 'ab', source: 'a', target: 'b' } },
 ];
 
 config.elements = dataEls;
 
-var cy = Cytoscape(config);
+const cy = Cytoscape(config);
+
+export default cy;
