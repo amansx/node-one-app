@@ -26,5 +26,9 @@
     "lodash": "^4.17.4",
     "mustache": "^2.3.0",
     "optimist": "^0.6.1"
+  },
+  "devDependencies": {
+    "cytoscape": "^3.2.5",
+    "jquery": "^3.2.1"
   }
 }

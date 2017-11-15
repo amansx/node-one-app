@@ -13,9 +13,11 @@ module.exports = (isDev, config) => {
 		entry: {
 			vendorDLL:[
 				'react', 
-				'lodash',
 				'react-dom',
+				'lodash',
 				'redux',
+				'cytoscape',
+				'jquery',
 				'babel-polyfill'
 			],
 		},

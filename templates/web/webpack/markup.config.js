@@ -1,10 +1,7 @@
 /*
-* TSTART_fileMsg_TEND
+* Sample extension file
 */
 
 module.exports = (isDev, baseConfig, config) => {
-
-	baseConfig.plugins[0].options.assets.push('additionalAsset.js');
 	return baseConfig;
-
 };
