@@ -3,7 +3,7 @@
   "bin": {
     "oneapp": "./generator.js"
   },
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "One-App Generator written in Node.js",
   "main": "index.js",
   "scripts": {

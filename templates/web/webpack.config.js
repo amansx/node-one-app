@@ -59,7 +59,7 @@ const CONFIG = (env = {ENV:'prod'}) => {
 
 		});
 		
-		console.log(JSON.stringify(conf, null, 4).white);
+		// console.log(JSON.stringify(conf, null, 4).white);
 		return conf;
 	};
 
