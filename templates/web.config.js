@@ -7,12 +7,13 @@ module.exports = {
 	"webpack.config.js" : {"-file": "webpack.config.js"},
 	"webpack": {
 		"__base": {
-			"assets.config.js"       : { "-file": "webpack/__base/assets.config.js"},
-			"base.config.js"         : { "-file": "webpack/__base/base.config.js"},
-			"bundle.dll.config.js"   : { "-file": "webpack/__base/bundle.dll.config.js"},
-			"markup.config.js"       : { "-file": "webpack/__base/markup.config.js"},
-			"typescript.config.js"   : { "-file": "webpack/__base/typescript.config.js"}
-		}
+			"assets.config.js"       : {"-file": "webpack/__base/assets.config.js"},
+			"base.config.js"         : {"-file": "webpack/__base/base.config.js"},
+			"bundle.dll.config.js"   : {"-file": "webpack/__base/bundle.dll.config.js"},
+			"markup.config.js"       : {"-file": "webpack/__base/markup.config.js"},
+			"typescript.config.js"   : {"-file": "webpack/__base/typescript.config.js"}
+		},
+		"markup.config.js"       : {"-file": "webpack/markup.config.js"},
 	},
 	"src": {
 		"app": {
